@@ -16,7 +16,7 @@ Latinizator — это приложение для транслитерации 
 1. Установите Python (желательно последнюю версию 3.x) с [официального сайта](https://www.python.org/).
 2. Скачайте или клонируйте проект:
    ```bash
-   git clone [https://github.com/venterum/Latinizator]
+   git clone https://github.com/venterum/Latinizator.git
    cd latinizator
    ```
 3. Установите необходимые зависимости:
