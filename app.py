@@ -39,7 +39,7 @@ def latinizator(text):
         prev_char = text[i - 1] if i > 0 else ''
         next_char = text[i + 1] if i + 1 < len(text) else ''
         
-        if char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'И', 'и'} and (i == 0 or prev_char in {'ь', 'ъ'}):
+        if char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'И', 'и'} and (i == 0 or prev_char in {'ь', 'ъ'} or prev_char in vowels):
             result.append('J' + basic_map[char.lower()] if char.isupper() else 'j' + basic_map[char])
         
         elif char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'И', 'и'}:
@@ -48,7 +48,7 @@ def latinizator(text):
             else:
                 result.append(basic_map[char])
         
-        elif char in soft_map and next_char.lower() in {'ь', 'Ь'}:
+        elif char in soft_map and next_char.lower() in {'ь', 'Ь', 'ё', 'ю', 'я', 'Ё', 'Ю', 'Я'}:
             result.append(soft_map[char])
         
         else:
