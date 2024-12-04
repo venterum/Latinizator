@@ -9,23 +9,23 @@ def latinizator(text):
     basic_map = {
         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
         'е': 'e', 'ё': 'o', 'ж': 'ž', 'з': 'z', 'и': 'i', 
-        'й': 'j', 'к': 'k', 'л': 'ł', 'м': 'm', 'н': 'n', 
+        'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 
         'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 
         'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'č', 
         'ш': 'š', 'щ': 'šch', 'ы': 'y', 'э': 'é', 
         'ю': 'u', 'я': 'a',
         'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 
         'Е': 'Je', 'Ё': 'Jo', 'Ж': 'Ž', 'З': 'Z', 'И': 'I', 
-        'Й': 'J', 'К': 'K', 'Л': 'Ł', 'М': 'M', 'Н': 'N', 
+        'Й': 'J', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 
         'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 
         'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C', 'Ч': 'Č', 
         'Ш': 'Š', 'Щ': 'Šch', 'Ы': 'Y', 'Э': 'É', 
         'Ю': 'Ju', 'Я': 'Ja'
     }
     soft_map = {
-        'л': 'l', 'т': 't́', 'д': 'd́', 'н': 'ń', 'п': 'ṕ',
+        'л': 'ĺ', 'т': 't́', 'д': 'd́', 'н': 'ń', 'п': 'ṕ',
         'с': 'ś', 'р': 'ŕ', 'з': 'ź', 'м': 'ḿ', 'в': 'v́',
-        'Л': 'L', 'Т': 'T́', 'Д': 'D́', 'Н': 'Ń', 'П': 'Ṕ',
+        'Л': 'Ĺ', 'Т': 'T́', 'Д': 'D́', 'Н': 'Ń', 'П': 'Ṕ',
         'С': 'Ś', 'Р': 'Ŕ', 'З': 'Ź', 'М': 'Ḿ', 'В': 'V́'
     }
     vowels = {'а', 'о', 'у', 'э', 'ы', 'я', 'е', 'ё', 'ю', 'и',
@@ -50,8 +50,6 @@ def latinizator(text):
         
         elif char in soft_map and next_char.lower() in {'ь', 'Ь', 'ё', 'ю', 'я', 'Ё', 'Ю', 'Я'}:
             result.append(soft_map[char])
-        elif char in ('лЛ') and next_char.lower() in {'я', 'е', 'ё', 'ю', 'и', 'Я', 'Е', 'Ё', 'Ю', 'И'}:
-            result.append(soft_map[char])
         
         else:
             result.append(basic_map.get(char, char))
@@ -63,7 +61,7 @@ class LatinizatorApp(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("main.ui", self)
-        self.setWindowTitle("Łatinizator")
+        self.setWindowTitle("Latinizator")
         self.setGeometry(100, 100, 1219, 644)
         self.originalTextEdit.textChanged.connect(self.update_output)
         self.copyButton.clicked.connect(self.copy_to_clipboard)
