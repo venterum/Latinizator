@@ -8,7 +8,7 @@ from PyQt6 import uic
 def latinizator(text):
     basic_map = {
         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 
-        'е': 'e', 'ё': 'o', 'ж': 'ž', 'з': 'z', 'и': 'i', 
+        'е': 'e', 'ё': 'о', 'ж': 'ž', 'з': 'z', 'и': 'i', 
         'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 
         'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 
         'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'č', 
@@ -39,7 +39,7 @@ def latinizator(text):
         prev_char = text[i - 1] if i > 0 else ''
         next_char = text[i + 1] if i + 1 < len(text) else ''
         
-        if char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я'} and (i == 0 or prev_char in {'ь', 'ъ'} or prev_char in vowels):
+        if char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'и', 'И'} and (i == 0 or prev_char in {'ь', 'ъ', ' '} or prev_char in vowels):
             result.append('J' + basic_map[char.lower()] if char.isupper() else 'j' + basic_map[char])
         
         elif char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'И', 'и'}:
