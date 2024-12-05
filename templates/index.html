@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latinizator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin: 1em 0;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Latinizator</h1>
+    <textarea id="input-text" placeholder="Введите текст на русском..."></textarea>
+    <div class="output" id="output-text">Текст на латинице появится здесь.</div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
