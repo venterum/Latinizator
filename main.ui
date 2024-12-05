@@ -33,14 +33,14 @@
        <widget class="QLabel" name="label">
         <property name="font">
          <font>
-          <family>Google Sans Medium</family>
+          <family>Segoe UI</family>
           <pointsize>24</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string> Łatinizator</string>
+         <string> Latinizator</string>
         </property>
        </widget>
       </item>
@@ -62,7 +62,7 @@
          <widget class="QTextEdit" name="originalTextEdit">
           <property name="font">
            <font>
-            <family>Google Sans</family>
+            <family>Segoe UI</family>
             <pointsize>14</pointsize>
            </font>
           </property>
@@ -72,7 +72,7 @@
          <widget class="QTextEdit" name="translitedText">
           <property name="font">
            <font>
-            <family>Google Sans</family>
+            <family>Segoe UI</family>
             <pointsize>14</pointsize>
            </font>
           </property>
@@ -92,7 +92,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Google Sans</family>
+        <family>Segoe UI</family>
         <pointsize>14</pointsize>
        </font>
       </property>
