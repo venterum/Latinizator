@@ -1,3 +1,17 @@
+const toggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+
+toggleButton.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+    }
+});
+
+body.setAttribute('data-theme', 'light');
+
 const inputText = document.getElementById('input-text');
 const outputText = document.getElementById('output-text');
 
