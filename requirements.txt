@@ -1,0 +1,4 @@
+Flask==3.0.3
+PyQt6==6.4.2
+pyqtdarktheme==2.1.0
+pywinstyles==1.8
