@@ -18,7 +18,7 @@ Latinizator — это инструмент для перевода русско
 | Береги платье снову, а честь смолоду.           | Beregi plat́je snovu, a čest́ smolodu.                 |  
 | Зима! Крестьянин, торжествуя, на дровнях обновляет путь. | Zima! Krest́janin, toržestvuja, na drovńah obnovĺajet put́. |  
 | Среди заражённого логикой мира, я научился кусать потолок. | Sredi zaražоnnogo logikoj mira, ja naučilśa kusat́ potolok. |  
-| В бедности вы ещё сохраняете свое благородство врожденных чувств, в нищете же никогда и никто. | V bednosti vy ješčо sohrańajete svoje blagorodstvo vroždennyh čuvstv, v niščete že nikogda i nikto. |  
+| В бедности вы ещё сохраняете свое благородство врождённых чувств, в нищете же никогда и никто. | V bednosti vy ješčо sohrańajete svoje blagorodstvo vroždennyh čuvstv, v niščete že nikogda i nikto. |  
 | Человеку иногда полезно взять себя за хохол да выдернуть себя вон, как редьку из гряды. | Čeloveku inogda polezno vźat́ seb́a za hohol da vydernut́ seb́a von, kak red́ku iz gŕady. |   
 
 ---
