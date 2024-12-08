@@ -121,7 +121,7 @@ Latinizator — это инструмент для перевода русско
 
 ## Лицензия
 
-Этот проект распространяется под лицензией [GNU General Public License](https://github.com/venterum/Latinizator/main/LICENSE).  
+Этот проект распространяется под лицензией [GNU General Public License](https://github.com/venterum/Latinizator/blob/main/LICENSE).  
 Вы можете свободно использовать, изменять и распространять этот код, соблюдая условия GPL.
 Любые производные работы или изменения также должны распространяться под той же лицензией.
 
