@@ -1,4 +1,3 @@
 Flask
 PyQt6
 pyqtdarktheme
-pywinstyles

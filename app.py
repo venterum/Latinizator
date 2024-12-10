@@ -1,4 +1,3 @@
-import pywinstyles
 import qdarktheme
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
@@ -39,5 +38,4 @@ if __name__ == "__main__":
     window = LatinizatorApp()
     window.show()
     app.setStyleSheet(qdarktheme.load_stylesheet())
-    pywinstyles.apply_style(window, "dark")
     app.exec()
