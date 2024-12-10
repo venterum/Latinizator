@@ -26,7 +26,6 @@
             margin: 2em auto;
             padding: 0 1em;
             max-width: 900px;
-            text-align: left;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
@@ -48,11 +47,10 @@
             }
         }
         textarea, .output {
-            width: 100%;
+            width: 350px;
             height: 200px;
             padding: 15px;
             font-size: 16px;
-            box-sizing: border-box;
             border: 1px solid var(--border-color);
             border-radius: 10px;
             background-color: var(--textarea-bg);
@@ -67,11 +65,31 @@
             background-color: var(--output-bg);
             overflow-y: auto;
             white-space: pre-wrap;
+            position: relative;
         }
-        @media (min-width: 768px) {
-            textarea, .output {
-                width: 48%;
-            }
+        .output-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .output-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .output-buttons button {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--textarea-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .output-buttons button:hover {
+            background-color: var(--output-bg);
         }
         .theme-switcher {
             position: fixed;
@@ -96,7 +114,13 @@
     <h1>Latinizator</h1>
     <div class="container">
         <textarea id="input-text" placeholder="Введите текст на русском..."></textarea>
-        <div class="output" id="output-text">Текст на латинице появится здесь.</div>
+        <div class="output-wrapper">
+            <div class="output" id="output-text">Текст на латинице появится здесь.</div>
+            <div class="output-buttons">
+                <button id="copy-output">📋</button>
+                <button id="clear-input">🗑️</button>
+            </div>
+        </div>
     </div>
     <script src="/static/script.js"></script>
 </body>
