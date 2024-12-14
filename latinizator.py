@@ -33,7 +33,7 @@ def latinizator(text):
         next_char = text[i + 1] if i + 1 < len(text) else ''
         
         if char in {'и', 'И'} and (i == 0 or prev_char == ' '):
-            result.append(basic_map[char.lower()] if char.isupper() else basic_map[char])
+            result.append(basic_map[char])
         elif char in {'е', 'ё', 'ю', 'я', 'Е', 'Ё', 'Ю', 'Я', 'и', 'И'} and (i == 0 or prev_char in {'ь', 'ъ', ' '} or prev_char in vowels):
             result.append('J' + basic_map[char.lower()] if char.isupper() else 'j' + basic_map[char])
         
