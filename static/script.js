@@ -36,7 +36,33 @@ clearButton.addEventListener('click', () => {
 });
 
 copyButton.addEventListener('click', () => {
-    navigator.clipboard.writeText(outputText.textContent)
-        .then(() => alert('Текст скопирован!'))
-        .catch(err => alert('Ошибка копирования: ' + err));
+    const textToCopy = outputText.textContent.trim();
+    if (textToCopy) {
+        const tempTextarea = document.createElement('textarea');
+        tempTextarea.value = textToCopy;
+        document.body.appendChild(tempTextarea);
+        tempTextarea.select();
+        try {
+            const successful = document.execCommand('copy');
+            showToast(successful ? 'Текст скопирован!' : 'Не удалось скопировать текст.');
+        } catch (err) {
+            showToast('Ошибка копирования: ' + err);
+        }
+        document.body.removeChild(tempTextarea);
+    } else {
+        showToast('Нечего копировать!');
+    }
 });
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}

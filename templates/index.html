@@ -107,6 +107,35 @@
         .theme-switcher:hover {
             background-color: var(--output-bg);
         }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+        }
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -122,6 +151,11 @@
             </div>
         </div>
     </div>
+    <footer>
+        <p>
+            Разработано <a href="https://github.com/venterum/Latinizator" target="_blank">Venterum</a>
+        </p>
+    </footer>
     <script src="/static/script.js"></script>
 </body>
 </html>
