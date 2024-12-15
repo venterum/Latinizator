@@ -32,7 +32,7 @@ inputText.addEventListener('input', () => {
 
 clearButton.addEventListener('click', () => {
     inputText.value = '';
-    outputText.textContent = 'Текст на латинице появится здесь.';
+    outputText.textContent = '';
 });
 
 copyButton.addEventListener('click', () => {
