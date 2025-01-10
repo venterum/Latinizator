@@ -164,5 +164,22 @@
         </p>
     </footer>
     <script src="/static/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/theme')
+                .then(response => response.json())
+                .then(data => {
+                    document.body.setAttribute('data-theme', data.theme);
+                });
+
+            const toggleButton = document.getElementById('theme-toggle');
+            toggleButton.addEventListener('click', () => {
+                const currentTheme = document.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.body.setAttribute('data-theme', newTheme);
+                document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
+            });
+        });
+    </script>
 </body>
 </html>

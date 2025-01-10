@@ -16,6 +16,11 @@ def translate():
     translated_text = latinizator(text)
     return jsonify({'translated': translated_text})
 
+@app.route('/theme', methods=['GET'])
+def get_theme():
+    theme = request.cookies.get('theme', 'light')
+    return jsonify({'theme': theme})
+
 if __name__ == "__main__":
     hostname = socket.gethostname()
     local_ip = socket.gethostbyname(hostname)

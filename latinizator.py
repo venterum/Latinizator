@@ -49,4 +49,9 @@ def latinizator(text):
         else:
             result.append(basic_map.get(char, char))
     
-    return ''.join(result)
+    translated_text = ''.join(result)
+    
+    if text.isupper():
+        translated_text = translated_text.upper()
+    
+    return translated_text
