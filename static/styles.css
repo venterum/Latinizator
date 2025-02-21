@@ -1,0 +1,318 @@
+/* Theme-specific variables */
+.theme-default {
+    --bg-color: #f0f0f5;
+    --text-color: #333;
+    --accent-color: #007bff;
+    --terminal-bg: rgba(255, 255, 255, 0.95);
+    --header-bg: #e0e0e0;
+    --surface-1: rgba(0, 123, 255, 0.05);
+    --surface-2: rgba(0, 123, 255, 0.08);
+}
+
+.theme-light {
+    --bg-color: #1e1e1e;
+    --text-color: #d4d4d4;
+    --accent-color: #4d9fff;
+    --terminal-bg: rgba(30, 30, 30, 0.95);
+    --header-bg: #2a2b3d;
+    --surface-1: rgba(77, 159, 255, 0.05);
+    --surface-2: rgba(77, 159, 255, 0.08);
+}
+
+/* General styles */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.noise {
+    display: none;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.logo-link:hover {
+    text-decoration: underline;
+}
+
+.controls-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lang-btn, .theme-toggle {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.lang-btn:hover, .theme-toggle:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.terminal {
+    background: var(--terminal-bg);
+    border-radius: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2rem auto;
+    width: 800px;
+    overflow: hidden;
+    position: relative;
+}
+
+.terminal-header {
+    background: var(--header-bg);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+}
+
+.terminal-header:active {
+    cursor: grabbing;
+}
+
+.window-title {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f57;
+}
+
+.dot.green { background: #28c840; }
+.dot.yellow { background: #febc2e; }
+.dot.red { background: #ff5f57; }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 1.5rem;
+    justify-content: space-between;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+textarea, .output {
+    width: 350px;
+    height: 300px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    background-color: var(--terminal-bg);
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+}
+
+.output {
+    flex: 1;
+    width: auto;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    user-select: text;
+    cursor: default;
+}
+
+.output-wrapper {
+    display: flex;
+    gap: 10px;
+    width: 350px;
+}
+
+.output-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.output-buttons button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    background-color: var(--terminal-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.output-buttons button:hover {
+    background-color: var(--surface-2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s, visibility 0s 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.plain-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.plain-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 850px) {
+    .terminal {
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    textarea, .output-wrapper {
+        width: 100%;
+    }
+
+    .output {
+        width: 100%;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .controls-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .terminal {
+        border-radius: 16px;
+    }
+
+    .terminal-header {
+        padding: 0.3rem 0.7rem;
+    }
+
+    .window-title {
+        font-size: 14px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    textarea, .output {
+        height: 250px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .output-buttons button {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .lang-btn, .theme-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 12px;
+        margin-top: 20px;
+    }
+
+    .toast {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

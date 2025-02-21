@@ -2,184 +2,63 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latinizator</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <style>
-        @font-face { font-family: Montserrat; src: url('static/fonts/Montserrat-Medium.ttf'); } 
-        :root {
-            --bg-color: #f0f0f5;
-            --text-color: #333;
-            --output-bg: #f9f9f9;
-            --textarea-bg: #fff;
-            --border-color: #ccc;
-        }
-        [data-theme="dark"] {
-            --bg-color: #1e1e1e;
-            --text-color: #f0f0f5;
-            --output-bg: #2c2c2c;
-            --textarea-bg: #2c2c2c;
-            --border-color: #555;
-        }
-        body {
-            font-family: Montserrat;
-            margin: 2em auto;
-            padding: 0 1em;
-            max-width: 900px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
-        }
-        textarea, .output {
-            width: 350px;
-            height: 200px;
-            padding: 15px;
-            font-size: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            background-color: var(--textarea-bg);
-            color: var(--text-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        textarea {
-            resize: none;
-        }
-        .output {
-            background-color: var(--output-bg);
-            overflow-y: auto;
-            white-space: pre-wrap;
-            position: relative;
-        }
-        .output-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .output-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .output-buttons button {
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--textarea-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .output-buttons button:hover {
-            background-color: var(--output-bg);
-        }
-        .theme-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            background-color: var(--textarea-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .theme-switcher:hover {
-            background-color: var(--output-bg);
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-            color: var(--text-color);
-        }
-        footer a {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--text-color);
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-        footer a:hover {
-            color: #007bff;
-            border-bottom-color: #007bff;
-        }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-        }
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Latinizator - venterum@web:~$</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <div class="theme-switcher" id="theme-toggle">Переключить тему 🌒</div>
-    <h1>Latinizator</h1>
-    <div class="container">
-        <textarea id="input-text" placeholder="Введите текст на русском..."></textarea>
-        <div class="output-wrapper">
-            <div class="output" id="output-text">Tekst na latinice pojavitśa zdeś.</div>
-            <div class="output-buttons">
-                <button id="copy-output">📋</button>
-                <button id="clear-input">🗑️</button>
+<body class="theme-default">
+    <div class="noise"></div>
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://venterum.com" class="plain-link">venterum@web:~$</a> latinizator
+        </div>
+        <div class="controls-wrapper">
+            <button class="lang-btn" data-lang="ru">
+                <span class="lang-flag">🇷🇺</span>
+                <span class="lang-name">RU</span>
+            </button>
+            <button class="lang-btn" data-lang="en">
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">EN</span>
+            </button>
+            <button class="theme-toggle">
+                <span class="text-ru">Переключить тему 🌒</span>
+                <span class="text-en">Switch Theme 🌒</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="terminal">
+        <div class="terminal-header">
+            <div class="window-title">venterum@latinizator</div>
+            <div class="window-controls">
+                <span class="dot green" id="minimize-btn" title="Minimize"></span>
+                <span class="dot yellow"></span>
+                <span class="dot red"></span>
             </div>
         </div>
-    </div>
+        <div class="terminal-content">
+            <div class="container">
+                <textarea id="input-text" class="text-ru" placeholder="Введите текст на русском..."></textarea>
+                <textarea id="input-text-en" class="text-en" placeholder="Enter text in Russian..." style="display: none;"></textarea>
+                <div class="output-wrapper">
+                    <div class="output" id="output-text">Tekst na latinice pojavitśa zdeś.</div>
+                    <div class="output-buttons">
+                        <button id="copy-output">📋</button>
+                        <button id="clear-input">🗑️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer>
-        <p>
-            Разработано <a href="https://github.com/venterum/Latinizator" target="_blank">Venterum</a>
-        </p>
+        <p class="text-ru">Разработано <a href="https://github.com/venterum/Latinizator" target="_blank">Venterum</a></p>
+        <p class="text-en">Developed by <a href="https://github.com/venterum/Latinizator" target="_blank">Venterum</a></p>
     </footer>
+    <div class="toast"></div>
     <script src="/static/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('/theme')
-                .then(response => response.json())
-                .then(data => {
-                    document.body.setAttribute('data-theme', data.theme);
-                });
-
-            const toggleButton = document.getElementById('theme-toggle');
-            toggleButton.addEventListener('click', () => {
-                const currentTheme = document.body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', newTheme);
-                document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
-            });
-        });
-    </script>
 </body>
 </html>
