@@ -4,180 +4,864 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latinizator</title>
+    <link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         @font-face { font-family: Montserrat; src: url('static/fonts/Montserrat-Medium.ttf'); } 
         :root {
-            --bg-color: #f0f0f5;
-            --text-color: #333;
-            --output-bg: #f9f9f9;
-            --textarea-bg: #fff;
-            --border-color: #ccc;
+            --bg-color: #f0f4f8;
+            --text-color: #2d3748;
+            --primary-color: #2d3748;
+            --secondary-color: #4a5568;
+            --output-bg: #ffffff;
+            --textarea-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --card-radius: 24px;
+            --btn-radius: 20px;
+            --nav-bg: #ffffff;
+            --accent-color: #4a5568;
+            --primary-color-rgb: 45, 55, 72;
+            --muted-color: #a0aec0;
+            --nav-height: 70px;
         }
-        [data-theme="dark"] {
-            --bg-color: #1e1e1e;
-            --text-color: #f0f0f5;
-            --output-bg: #2c2c2c;
-            --textarea-bg: #2c2c2c;
-            --border-color: #555;
+        * {
+            box-sizing: border-box;
         }
         body {
-            font-family: Montserrat;
-            margin: 2em auto;
-            padding: 0 1em;
-            max-width: 900px;
+            font-family: 'Inter', Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .container {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            font-size: 14px;
         }
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
+        .app-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 15px 10px;
             }
         }
-        textarea, .output {
-            width: 350px;
-            height: 200px;
-            padding: 15px;
-            font-size: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            background-color: var(--textarea-bg);
-            color: var(--text-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        textarea {
-            resize: none;
-        }
-        .output {
-            background-color: var(--output-bg);
-            overflow-y: auto;
-            white-space: pre-wrap;
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.25rem;
+            background-color: var(--nav-bg);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: calc(var(--nav-height) / 2);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: var(--nav-height);
             position: relative;
+            overflow: hidden;
         }
-        .output-wrapper {
+        .nav:hover {
+            box-shadow: 0 15px 35px var(--shadow-color);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+            .nav {
+                padding: 0 1.5rem;
+                justify-content: center;
+                text-align: center;
+                height: auto;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+        }
+        .nav-logo {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Roboto Slab', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .output-buttons {
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Roboto Slab', serif;
+            font-size: 22px;
+            box-shadow: 0 6px 15px var(--shadow-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .output-buttons button {
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--textarea-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+        .logo-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 8px 20px var(--shadow-color);
         }
-        .output-buttons button:hover {
-            background-color: var(--output-bg);
+        .nav-links {
+            display: flex;
+            gap: 15px;
         }
-        .theme-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            background-color: var(--textarea-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .theme-switcher:hover {
-            background-color: var(--output-bg);
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-            color: var(--text-color);
-        }
-        footer a {
+        .nav-link {
             color: var(--text-color);
             text-decoration: none;
-            border-bottom: 1px solid var(--text-color);
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 8px 16px;
+            border-radius: calc(var(--nav-height) / 2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid transparent;
+            font-size: 14px;
+            gap: 6px;
+            height: 38px;
         }
-        footer a:hover {
-            color: #007bff;
-            border-bottom-color: #007bff;
+        .nav-link:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+        }
+        .nav-link.active {
+            color: white;
+            background-color: var(--primary-color);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex: 1;
+        }
+        @media (min-width: 992px) {
+            .editor-container {
+                flex-direction: row;
+                align-items: stretch;
+                min-height: 600px;
+            }
+        }
+        @media (max-width: 767px) {
+            .editor-container {
+                gap: 20px;
+            }
+        }
+        .editor-panel, .output-panel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--textarea-bg);
+            border-radius: var(--card-radius);
+            box-shadow: 0 15px 40px var(--shadow-color);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            min-height: 400px;
+        }
+        .editor-panel:hover, .output-panel:hover {
+            box-shadow: 0 20px 45px var(--shadow-color);
+            transform: translateY(-3px);
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+        }
+        @media (max-width: 480px) {
+            .panel-header {
+                padding: 12px 16px;
+            }
+        }
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-tools {
+            display: flex;
+            gap: 10px;
+        }
+        textarea, .output {
+            flex-grow: 1;
+            padding: 20px;
+            font-size: 15px;
+            line-height: 1.6;
+            border: none;
+            background-color: var(--textarea-bg);
+            color: var(--text-color);
+            resize: none;
+            outline: none;
+            font-family: 'Inter', monospace;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        @media (max-width: 480px) {
+            textarea, .output {
+                padding: 16px;
+                font-size: 14px;
+            }
+        }
+        textarea:focus {
+            box-shadow: inset 0 0 0 2px var(--primary-color);
+        }
+        .output {
+            overflow-y: auto;
+            white-space: pre-wrap;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .tool-button {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tool-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-rounded {
+            font-size: 20px;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .tool-button:hover .material-symbols-rounded {
+            transform: scale(1.1);
+        }
+        .tool-button:active .material-symbols-rounded {
+            transform: scale(0.9);
         }
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px var(--shadow-color);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            transition: opacity 0.3s, transform 0.5s, visibility 0.3s;
+            font-weight: 500;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        @media (max-width: 480px) {
+            .toast {
+                left: 20px;
+                right: 20px;
+                text-align: center;
+            }
         }
         .toast.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            font-size: 14px;
+            color: var(--muted-color);
+            background-color: rgba(var(--primary-color-rgb), 0.03);
+            border-top: 1px solid var(--border-color);
+        }
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        footer a:hover {
+            color: var(--secondary-color);
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            transform: translateY(-1px);
+        }
+        .btn {
+            padding: 10px 18px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--btn-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-size: 14px;
+        }
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .project-section {
+            display: none;
+            padding: 30px;
+            background-color: var(--textarea-bg);
+            border-radius: var(--card-radius);
+            box-shadow: 0 15px 40px var(--shadow-color);
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+            flex: 1;
+            animation: fadeIn 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 767px) {
+            .project-section {
+                padding: 20px;
+            }
+        }
+        .project-section h2 {
+            color: var(--primary-color);
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        @media (min-width: 992px) {
+            .project-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .info-card {
+            background-color: var(--bg-color);
+            border-radius: var(--card-radius);
+            padding: 25px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(0);
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--shadow-color);
+        }
+        @media (max-width: 767px) {
+            .info-card {
+                padding: 20px;
+            }
+        }
+        .info-card h3 {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .info-card p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .example-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .example-table:hover {
+            box-shadow: 0 15px 35px var(--shadow-color);
+            transform: translateY(-3px);
+        }
+        .example-table th, .example-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            .example-table th, .example-table td {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+        .example-table th {
+            font-weight: 600;
+            color: var(--primary-color);
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            font-size: 15px;
+        }
+        .example-table tr:last-child td {
+            border-bottom: none;
+        }
+        .example-table tr {
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .example-table tr:hover td {
+            background-color: rgba(var(--primary-color-rgb), 0.03);
+        }
+        .line-numbers {
+            padding: 20px 10px 20px 15px;
+            text-align: right;
+            color: var(--muted-color);
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            user-select: none;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            overflow-y: hidden;
+        }
+        @media (max-width: 480px) {
+            .line-numbers {
+                padding: 16px 8px 16px 12px;
+                font-size: 14px;
+            }
+        }
+        .editor-wrapper {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .output-controls {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 20px;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+        }
+        @media (max-width: 480px) {
+            .output-controls {
+                padding: 12px 16px;
+                justify-content: center;
+            }
+        }
+        .output-control-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--textarea-bg);
+            color: var(--text-color);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            white-space: nowrap;
+        }
+        .output-control-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .output-control-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+        .section-title {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-left: 15px;
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .section-title:hover {
+            transform: translateX(5px);
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+        @media (max-width: 767px) {
+            .section-title {
+                font-size: 20px;
+                margin-top: 25px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes slide-in {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .panel-title .material-symbols-rounded {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        .editor-panel, .output-panel {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #theme-toggle {
+            width: 40px;
+            padding: 0;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        #theme-toggle span {
+            margin: 0;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --primary-color: #9e9e9e;
+            --secondary-color: #757575;
+            --output-bg: #1e1e1e;
+            --textarea-bg: #1e1e1e;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --nav-bg: #1e1e1e;
+            --accent-color: #9e9e9e;
+            --primary-color-rgb: 158, 158, 158;
+            --muted-color: #757575;
+        }
+        
+        [data-theme="dark"] .nav-link.active {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] #theme-toggle {
+            background-color: #333333;
+            border: 1px solid #444444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        [data-theme="dark"] #theme-toggle:hover {
+            background-color: #444444;
+            transform: translateY(-3px);
+        }
+        
+        [data-theme="dark"] .tool-button:hover,
+        [data-theme="dark"] .btn {
+            background-color: #333333;
+        }
+        
+        [data-theme="dark"] .info-card {
+            background-color: #1e1e1e;
+        }
+        
+        [data-theme="dark"] .example-table th {
+            background-color: #1a1a1a;
+        }
+        
+        [data-theme="dark"] .example-table tr:hover td {
+            background-color: #282828;
+        }
     </style>
 </head>
 <body>
-    <div class="theme-switcher" id="theme-toggle">Переключить тему 🌒</div>
-    <h1>Latinizator</h1>
-    <div class="container">
+    <div class="app-container">
+        <nav class="nav">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">L</div>
+                Latinizator
+            </a>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" id="editor-link">
+                    <span class="material-symbols-rounded">edit_document</span>
+                    Редактор
+                </a>
+                <a href="#" class="nav-link" id="project-link">
+                    <span class="material-symbols-rounded">info</span>
+                    О проекте
+                </a>
+                <button class="nav-link" id="theme-toggle">
+                    <span class="material-symbols-rounded">dark_mode</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="editor-container" id="editor-view">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="material-symbols-rounded">edit</span>
+                        Русский текст
+                    </div>
+                    <div class="panel-tools">
+                        <button id="fullscreen-input" class="tool-button" title="На весь экран">
+                            <span class="material-symbols-rounded">fullscreen</span>
+                        </button>
+                        <button id="clear-input" class="tool-button" title="Очистить">
+                            <span class="material-symbols-rounded">delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="line-numbers"></div>
         <textarea id="input-text" placeholder="Введите текст на русском..."></textarea>
-        <div class="output-wrapper">
-            <div class="output" id="output-text">Tekst na latinice pojavitśa zdeś.</div>
-            <div class="output-buttons">
-                <button id="copy-output">📋</button>
-                <button id="clear-input">🗑️</button>
+                </div>
+            </div>
+            <div class="output-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="material-symbols-rounded">translate</span>
+                        Текст на латинице
+                    </div>
+                    <div class="panel-tools">
+                        <button id="copy-output" class="tool-button" title="Копировать">
+                            <span class="material-symbols-rounded">content_copy</span>
+                        </button>
+                        <button id="fullscreen-output" class="tool-button" title="На весь экран">
+                            <span class="material-symbols-rounded">fullscreen</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="output" id="output-text">Текст на латинице появится здесь.</div>
+                <div class="output-controls">
+                    <button class="output-control-btn" data-output-type="normal">
+                        <span class="material-symbols-rounded">text_format</span>
+                        Обычный
+                    </button>
+                    <button class="output-control-btn" data-output-type="uppercase">
+                        <span class="material-symbols-rounded">arrow_upward</span>
+                        ПРОПИСНЫЕ
+                    </button>
+                    <button class="output-control-btn" data-output-type="lowercase">
+                        <span class="material-symbols-rounded">arrow_downward</span>
+                        строчные
+                    </button>
+                    <button class="output-control-btn" data-output-type="no_diacritics">
+                        <span class="material-symbols-rounded">format_clear</span>
+                        Без диакритики
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section" id="project-view">
+            <h2>О проекте Latinizator</h2>
+            <div class="project-grid">
+                <div class="info-card">
+                    <h3>Что такое Latinizator?</h3>
+                    <p>Latinizator — это инструмент для транслитерации русского текста в латиницу. Он следует определённым правилам для сохранения правильного произношения и читаемости.</p>
+                    <p>Этот проект создан как практический и образовательный инструмент, не предназначенный для замены или критики кириллического алфавита.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Как это работает</h3>
+                    <p>Инструмент использует специальные таблицы соответствия для преобразования кириллических символов в их латинские эквиваленты. Он обрабатывает особые случаи, такие как смягчение согласных и правильная йотация гласных.</p>
+                    <p>Алгоритм сохраняет фонетику и читаемость исходного русского текста.</p>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Примеры</h3>
+            <table class="example-table">
+                <thead>
+                    <tr>
+                        <th>Русский текст</th>
+                        <th>Латинизированный текст</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Съешь ещё этих мягких французских булок, да выпей чаю.</td>
+                        <td>Sješ ješčо étih ḿagkih francuzskih bulok, da vypej čaju.</td>
+                    </tr>
+                    <tr>
+                        <td>Береги платье снову, а честь смолоду.</td>
+                        <td>Beregi plat́je snovu, a čest́ smolodu.</td>
+                    </tr>
+                    <tr>
+                        <td>Зима! Крестьянин, торжествуя, на дровнях обновляет путь.</td>
+                        <td>Zima! Krest́janin, toržestvuja, na drovńah obnovĺajet put́.</td>
+                    </tr>
+                    <tr>
+                        <td>Среди заражённого логикой мира, я научился кусать потолок.</td>
+                        <td>Sredi zaražоnnogo logikoj mira, ja naučilśa kusat́ potolok.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="section-title">Правила транслитерации</h3>
+            <div class="project-grid">
+                <div class="info-card">
+                    <h4>Обозначение мягкости согласных</h4>
+                    <p>Перед некоторыми гласными («е», «ё», «ю», «я») или мягким знаком («ь») согласные смягчаются во избежание неверного прочтения слова. Смягчение обозначается акутом («´»):</p>
+                    <ul>
+                        <li><em>Ĺudi</em> (люди)</li>
+                        <li><em>Zeleń</em> (зелень)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Йотирование гласных</h4>
+                    <p>Гласные «е», «ё», «ю», «я», которые могут читаться как два звука в начале слова, после мягкого/твёрдого знаков или после других гласных, пишутся с буквой «j» в соответствующих случаях:</p>
+                    <ul>
+                        <li><em>Jelena</em> (Елена)</li>
+                        <li><em>Objektiv</em> (объектив)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Мягкий и твёрдый знаки</h4>
+                    <p>Мягкий знак («ь») и твёрдый знак («ъ») опускаются при транслитерации, однако они влияют на смягчение соседних согласных и йотирование некоторых гласных.</p>
+                    <p>Примеры:</p>
+                    <ul>
+                        <li><em>Vaĺjažnyj</em> (вальяжный)</li>
+                        <li><em>Podjezd</em> (подъезд)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Таблица соответствия</h4>
+                    <p>В Latinizator используется специальная таблица соответствия букв русского и латинского алфавита для обеспечения правильной транслитерации. Полную таблицу вы можете найти на <a href="https://github.com/venterum/Latinizator" target="_blank">GitHub проекта</a>.</p>
+                </div>
+            </div>
+            
+            <div class="info-card" style="margin-top: 25px;">
+                <h4>Лицензия</h4>
+                <p>Этот проект распространяется под лицензией <a href="https://github.com/venterum/Latinizator/blob/main/LICENSE" target="_blank">GNU General Public License</a>.</p>
+                <p>Вы можете свободно использовать, изменять и распространять этот код, соблюдая условия GPL. Любые производные работы или изменения также должны распространяться под той же лицензией.</p>
             </div>
         </div>
     </div>
+
     <footer>
         <p>
-            Разработано <a href="https://github.com/venterum/Latinizator" target="_blank">Venterum</a>
+            Разработано <a href="https://venterum.com" target="_blank">Venterum</a> | 
+            <a href="https://github.com/venterum/Latinizator" target="_blank">GitHub</a>
         </p>
     </footer>
+
     <script src="/static/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('/theme')
-                .then(response => response.json())
-                .then(data => {
-                    document.body.setAttribute('data-theme', data.theme);
-                });
+            // Navigation
+            const editorLink = document.getElementById('editor-link');
+            const projectLink = document.getElementById('project-link');
+            const editorView = document.getElementById('editor-view');
+            const projectView = document.getElementById('project-view');
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.material-symbols-rounded');
 
-            const toggleButton = document.getElementById('theme-toggle');
-            toggleButton.addEventListener('click', () => {
-                const currentTheme = document.body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', newTheme);
-                document.cookie = `theme=${newTheme}; path=/; max-age=31536000`;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            function updateThemeIcon(theme) {
+                if (theme === 'dark') {
+                    themeIcon.textContent = 'light_mode';
+                } else {
+                    themeIcon.textContent = 'dark_mode';
+                }
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            editorLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                editorView.style.display = 'flex';
+                projectView.style.display = 'none';
+                editorLink.classList.add('active');
+                projectLink.classList.remove('active');
+            });
+
+            projectLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                editorView.style.display = 'none';
+                projectView.style.display = 'block';
+                projectLink.classList.add('active');
+                editorLink.classList.remove('active');
+                
+                const cards = projectView.querySelectorAll('.info-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.animation = `slide-in 0.5s ${index * 0.2}s forwards cubic-bezier(0.165, 0.84, 0.44, 1)`;
+                    }, 100);
+                });
             });
         });
     </script>
